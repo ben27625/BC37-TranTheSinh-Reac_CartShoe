@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 
 export default class Cart extends Component {
+  caclTotalAmount = () => {
+    return this.props.cart.reduce((total, item) => {
+      return total + item.quantity * item.prod.price;
+    }, 0);
+  };
+
   render() {
     document.getElementsByTagName("body")[0].style.overflow = "hidden";
     return (
@@ -87,6 +93,11 @@ export default class Cart extends Component {
                   </tr>
                 );
               })}
+              <tr>
+                <td colSpan={7} className="text-end">
+                  Total : {this.caclTotalAmount()}
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

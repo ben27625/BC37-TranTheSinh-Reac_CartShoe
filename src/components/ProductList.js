@@ -227,44 +227,33 @@ export default class ProductList extends Component {
     this.setState({ cart: cloneCart });
   };
 
-
   increaseQuantity = (id) => {
     const cloneCart = [...this.state.cart];
 
-    const foundItem = cloneCart.find((item) =>id === item.prod.id);
-
-   
+    const foundItem = cloneCart.find((item) => id === item.prod.id);
 
     if (foundItem) {
       foundItem.quantity += 1;
     }
 
-    this.setState(
-      {
-        cart: cloneCart,
-      }
-    );
-  }
+    this.setState({
+      cart: cloneCart,
+    });
+  };
 
   decreaseQuantity = (id) => {
     const cloneCart = [...this.state.cart];
 
-    const foundItem = cloneCart.find((item) =>id === item.prod.id);
+    const foundItem = cloneCart.find((item) => id === item.prod.id);
 
-   
-
-    if (foundItem) {
+    if (foundItem && foundItem.quantity > 1) {
       foundItem.quantity -= 1;
     }
 
-    this.setState(
-      {
-        cart: cloneCart,
-      }
-    );
-  }
-
-
+    this.setState({
+      cart: cloneCart,
+    });
+  };
 
   render() {
     return (
@@ -285,12 +274,11 @@ export default class ProductList extends Component {
 
         {this.state.isShowCart && (
           <Cart
-          cart={this.state.cart}
-          hideCart={this.hideCart}
-          deleteCartItem={this.deleteCartItem}
-          increaseQuantity={this.increaseQuantity}
-          decreaseQuantity={this.decreaseQuantity}
-
+            cart={this.state.cart}
+            hideCart={this.hideCart}
+            deleteCartItem={this.deleteCartItem}
+            increaseQuantity={this.increaseQuantity}
+            decreaseQuantity={this.decreaseQuantity}
           />
         )}
       </div>
